@@ -1,0 +1,15 @@
+{
+  "folder_path": "/Users/andrewpierno/Desktop/personal/dev/projects/untitled_blockchain/dag",
+  "folder_name": "tmp",
+  "env": "dev",
+  "log_level": "silly",
+  "log_path": "/Users/andrewpierno/Desktop/personal/dev/projects/untitled_blockchain/dag/log",
+  "create_new": true,
+  "chain_id": "test-chain",
+  "abci_proxy_port": 5080,
+  "abci_proxy_host": "0.0.0.0",
+  "rpc_listen_address": 46657,
+  "p2p_port": 46656,
+  "seeds": [],
+  "block_interval": 2000
+}
