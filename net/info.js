@@ -9,6 +9,61 @@ const { zeromq } = require('../connections');
 const subSock = zeromq.subSock;
 const pubSock = zeromq.pubSock;
 
+subSock.on('message', function(topic, message) {
+	topic = topic.toString()
+	switch (topic) {
+		/* Info */
+		case 'info.app_state':
+			return app_state_incoming(message)
+			break;
+
+		case 'info.set_option':
+			return set_option_incoming(message)
+			break;
+
+		case 'info.query':
+			return query_incoming(message)
+			break;
+
+		case 'info.echo':
+			return echo_incoming(message)
+			break;
+
+		default:
+			return
+	}
+});
+
+
+const app_state_incoming = (message) => {
+  const m = JSON.parse(message.toString())
+  console.log('M', m)
+  if (m.app_hash === '' && m.height === 0) {
+    logger.info('INFO - incoming - app_state - blank state')
+  }
+  logger.info('Info (Incoming) - app_state_incoming')
+}
+
+const set_option_incoming = (message) => {
+  console.log('MESSAGE', message.toString())
+  logger.info('Info (Incoming) - set_option_incoming')
+}
+
+const query_incoming = (message) => {
+  console.log('MESSAGE', message.toString())
+  logger.info('Info (Incoming) - query_incoming')
+}
+
+const echo_incoming = (message) => {
+  console.log('MESSAGE', message.toString())
+  logger.info('Info (Incoming) - echo_incoming')
+}
+
+const unknown_incoming = (message) => {
+  console.log('MESSAGE', message.toString())
+  logger.info('Info (Incoming) - unknown_incoming')
+}
+
 
 module.exports = {
   // if init is already done, dont do anything

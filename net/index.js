@@ -7,6 +7,7 @@ const { block_interval } = require('../config.json')
 const { safeInit, beginBlock, deliverTx, endBlock, commit } = consensus
 const { app_state, setOption, query, echo } = info
 const { check_tx } = mempool
+const { getState, setState } = require('../state')
 /*
 
 Loop:
@@ -17,14 +18,16 @@ let round = 0;
 setInterval(() => {
   logger.info(`============== ${round} ================`);
   /* Consensus loop */
-  // safeInit(round);
-  // beginBlock(round)
-  // deliverTx(round)
+  if (!getState('initialized')) {
+    safeInit(round);
+  }
+  beginBlock()
+  deliverTx()
   // endBlock(round)
   // commit(round)
 
   /* Mempool Loop */
-  check_tx()
+  // check_tx()
 
   /* Info Loop */
   // app_state()
